@@ -7,7 +7,7 @@ const preview: Preview = {
     a11y: { test: 'todo' },
     options: {
       storySort: {
-        order: ['Úvod', 'Tokeny', ['Barvy', 'Typografie', 'Rozměry'], 'Komponenty', 'Vzory', 'Reference'],
+        order: ['Úvod', 'Tokeny', ['Barvy', 'Typografie', 'Rozměry'], 'Komponenty', 'Vzory', 'Pages DEK', 'Reference'],
       },
     },
     backgrounds: { default: 'white', values: [{ name: 'white', value: '#ffffff' }, { name: 'gray-lightest', value: '#f2f2f2' }] },

@@ -15,7 +15,8 @@ export interface HeaderProps {
 
 /**
  * Hlavička (.com-header): logo vlevo, vyhledávání uprostřed (.dek-search — šedé pole 40 px,
- * zaoblení jen vlevo, tlačítko vpravo), přihlášení a košík vpravo. Bez stínu, bílá.
+ * zaoblení jen vlevo, tlačítko vpravo), telefon 510 000 100 + Seznam prodejen, přihlášení a košík vpravo.
+ * Bez stínu, bílá. Lišta kategorií je zvlášť: NavBar.
  */
 export function Header({ cartCount = 0, userName, onSearch }: HeaderProps) {
   return (
@@ -59,7 +60,11 @@ export function Header({ cartCount = 0, userName, onSearch }: HeaderProps) {
             </Button>
           </Box>
 
-          <Box sx={{ ml: 'auto', display: 'flex', gap: 1.5, alignItems: 'center' }}>
+          <Box sx={{ ml: 'auto', display: 'flex', gap: 2, alignItems: 'center' }}>
+            <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+              <Typography component="a" href="tel:510000100" sx={{ fontWeight: 700, color: dekColors.gray, textDecoration: 'none', fontSize: '.95rem' }}>510 000 100</Typography>
+              <Typography component="a" href="#" sx={{ fontSize: '.8rem', color: dekColors.grayMedium }}>Seznam prodejen</Typography>
+            </Box>
             <Button variant="text">{userName ?? 'Přihlášení'}</Button>
             <Button tone="gray" variant="contained">
               Košík{cartCount ? ` (${cartCount})` : ''}
