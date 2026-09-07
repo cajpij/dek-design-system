@@ -20,6 +20,8 @@ export interface ProductRowProps {
   unitLabel: string
   /** cena za balení (role, pytel…) s DPH */
   packPrice: number
+  /** přeškrtnutá cena před slevou, jak ji ukazuje web */
+  originalPackPrice?: number
   packLabel: string
   packContains: string
   availability: Availability
@@ -31,7 +33,7 @@ export interface ProductRowProps {
  * Řádek produktu ve výpisu kategorie (.comd-product-view--long): obrázek vlevo, název,
  * dvě ceny (za m² a za balení), dostupnost, množství + Do košíku a přepočet „celkem s DPH“.
  */
-export function ProductRow({ name, code, href = '#', imageUrl, unitPrice, unitLabel, packPrice, packLabel, packContains, availability, availabilityDetail, onAddToCart }: ProductRowProps) {
+export function ProductRow({ name, code, href = '#', imageUrl, unitPrice, unitLabel, packPrice, originalPackPrice, packLabel, packContains, availability, availabilityDetail, onAddToCart }: ProductRowProps) {
   const [qty, setQty] = useState(1)
   return (
     <Paper variant="outlined" component="article" sx={{ borderRadius: '3px', p: 2, display: 'grid', gridTemplateColumns: { xs: '1fr', md: '120px 1fr 180px 280px' }, gap: 2.5, alignItems: 'start' }}>
@@ -53,7 +55,12 @@ export function ProductRow({ name, code, href = '#', imageUrl, unitPrice, unitLa
       <Box>
         <Typography sx={{ fontSize: '1.4rem', fontWeight: 700, lineHeight: 1.1 }}>{czk.format(unitPrice)}</Typography>
         <Typography sx={{ fontSize: '.8rem', color: 'text.secondary' }}>cena za {unitLabel} s DPH</Typography>
-        <Typography sx={{ mt: 1, fontWeight: 700 }}>{czk.format(packPrice)}</Typography>
+        {originalPackPrice ? (
+          <Typography sx={{ mt: 1, fontSize: '.85rem', color: 'text.secondary', textDecoration: 'line-through' }}>
+            {czk.format(originalPackPrice)}
+          </Typography>
+        ) : null}
+        <Typography sx={{ mt: originalPackPrice ? 0 : 1, fontWeight: 700 }}>{czk.format(packPrice)}</Typography>
         <Typography sx={{ fontSize: '.8rem', color: 'text.secondary' }}>cena za {packLabel} s DPH</Typography>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>

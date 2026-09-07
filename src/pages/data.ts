@@ -2,37 +2,90 @@ import type { ProductCardProps } from '../components/ProductCard/ProductCard'
 import type { ProductRowProps } from '../components/ProductRow/ProductRow'
 import type { ProductDetailProps } from '../components/ProductDetail/ProductDetail'
 
-/** Ukázková data pro stránky. Názvy, kódy a struktura cen odpovídají tomu, co web skutečně zobrazuje. */
+/**
+ * Reálná data z www.dek.cz, posbíraná 7. 9. 2026 přímo ze stránek
+ * (homepage, /produkty/vypis/2-hydroizolace, detail GLASTEK 30 STICKER PLUS).
+ * Obrázky se odkazují na CDN webu (cdn1.idek.cz) — do repa se nekopírují,
+ * takže zůstávají aktuální a nic se nikam nešíří. Ceny jsou veřejné ceny
+ * s DPH z okamžiku sběru; přeškrtnutá je cena před slevou, jak ji web ukazuje.
+ */
 
-export const HOME_CATEGORIES = [
-  'Stavebniny', 'Elektromateriál', 'Voda Topení Sanita', 'Nářadí', 'Barvy a laky', 'Půjčovna',
+const CDN = 'https://cdn1.idek.cz'
+
+export const DEK_LOGO_URL = `${CDN}/file/dek-logo-3d5e3743.svg`
+
+export const HOME_CATEGORIES: { title: string; img: string }[] = [
+  { title: 'Stavebniny', img: `${CDN}/dek_cz/img/category/-1185575433_ew250_eh250.webp` },
+  { title: 'Elektromateriál', img: `${CDN}/dek_cz/img/category/-29662401_ew250_eh250.webp` },
+  { title: 'Voda Topení Sanita', img: `${CDN}/dek_cz/img/category/1649845010_ew250_eh250.webp` },
+  { title: 'Nářadí', img: `${CDN}/dek_cz/img/category/1676327437_ew250_eh250.webp` },
+  { title: 'Barvy a laky', img: `${CDN}/dek_cz/img/category/-1942432845_ew250_eh250.webp` },
+  { title: 'Půjčovna', img: `${CDN}/dek_cz/img/category-rental/-1446124805_ew250_eh250.webp` },
 ]
 
-export const SUBCATEGORIES_STAVEBNINY = [
-  'Hrubá stavba', 'Ploché střechy', 'Šikmé střechy', 'Fasádní systémy', 'Hydroizolace', 'Tepelné izolace',
-  'Suchá výstavba', 'Dřevo', 'Suché směsi a stavební chemie', 'Stavební výplně', 'Podlahy a obklady', 'Klempířské prvky',
+/** Hlavní slider a bannery homepage — obrázky mají texty v sobě, přesně jako na webu. */
+export const MAIN_BANNER = { alt: 'Mega akce', img: `${CDN}/img/20c5579deacf78b750cbab8caee623f6.webp` }
+export const HOME_BANNERS: { alt: string; img: string }[] = [
+  { alt: 'Zářijový stavařský magazín', img: `${CDN}/img/b43e9f9063d47016aa6beccfde75f875.webp` },
+  { alt: 'Věrnostní program Štědrá sezóna', img: `${CDN}/img/af476b260461e63f2c93928fe767eb5d.webp` },
+  { alt: 'Půjčovna — bez kauce a bez rizika', img: `${CDN}/img/78c1973e4461b18cac08a85792dc0e4d.webp` },
+  { alt: '5 způsobů jak poptat', img: `${CDN}/img/61b0fd5485b0f615d3454eb0772dc575.webp` },
+]
+export const BOTTOM_BANNERS: { alt: string; img: string }[] = [
+  { alt: 'Aplikace DEK CZ', img: `${CDN}/img/3e7c0e743ff0c869e4a24cd19ef969a3.webp` },
+  { alt: 'Články', img: `${CDN}/img/a0598f6b606f9b6892ea5d3112db93a3.webp` },
+  { alt: 'Katalog stavebnin DEK 2026', img: `${CDN}/img/73c26901eb9cb5bc84a4492ffae2963e.webp` },
 ]
 
-export const SUBCATEGORIES_HYDRO = [
-  'Asfaltové pásy', 'Hydroizolační fólie', 'Geotextilie', 'Penetrace, asfaltové nátěry a tmely',
-  'Hydroizolační nátěry a stěrky', 'Poplastované plechy', 'Prostupy a těsnění',
+/** 18 výrobců z pásu na homepage; u prvních šesti má web logo, které jde odkázat přímo. */
+export const BRANDS: { name: string; img?: string }[] = [
+  { name: 'Wienerberger', img: `${CDN}/img/9091658e0b58070dae8cb535eab7e852_ew248_eh248.webp` },
+  { name: 'Porotherm', img: `${CDN}/img/134dacfd8848346064586c18d3e7c73c_ew248_eh248.webp` },
+  { name: 'Tondach', img: `${CDN}/img/1206ee45e613b2dbb4ac5d03f946d5d9_ew248_eh248.webp` },
+  { name: 'Weber', img: `${CDN}/img/fa4cc15b484dd815b89c120120b9830a_ew248_eh248.webp` },
+  { name: 'Sika', img: `${CDN}/img/ea06a6042df4745e0e7338f5622c74ba_ew248_eh248.webp` },
+  { name: 'Röben', img: `${CDN}/img/f9a4d4adfe1c4fdc4a77b40adc2d9618_ew248_eh248.webp` },
+  { name: 'Isover' }, { name: 'Hager' }, { name: 'Hilti' }, { name: 'Baumit' },
+  { name: 'DeWalt' }, { name: 'Philips' }, { name: 'Grohe' }, { name: 'Börner' },
+  { name: 'Heluz' }, { name: 'Best' }, { name: 'Bosch' }, { name: 'Rigips' },
 ]
 
-export const FEATURED: ProductCardProps[] = [
-  { name: 'Samolepicí asfaltový pás GLASTEK 30 STICKER PLUS KVK (role/10 m²)', code: '1010410010', brand: 'DEK', price: 1754.5, priceWithoutVat: 1450, unit: 'role', availability: 'skladem', availabilityDetail: 'v 93 prodejnách' },
-  { name: 'Geotextilie FILTEK 300 g/m² š. 2 m (role/100 m²)', code: '2615261100', brand: 'DEK', price: 2189, priceWithoutVat: 1809.09, unit: 'role', availability: 'skladem', availabilityDetail: 'v 71 prodejnách' },
-  { name: 'Penetrace DEKPRIMER 12 kg', code: '1030405060', brand: 'DEK', price: 1149, priceWithoutVat: 949.59, unit: 'ks', availability: 'na-objednavku', availabilityDetail: 'do 3 dnů' },
-  { name: 'Minerální vata ISOVER UNIROL PROFI 100 mm', code: '1020304050', brand: 'Isover', price: 689, originalPrice: 759, priceWithoutVat: 569.42, unit: 'balení', availability: 'skladem', availabilityDetail: 'v 54 prodejnách' },
-  { name: 'Sádrokartonová deska RIGIPS RB 12,5 mm 1250×2000', code: '1140011250', brand: 'Rigips', price: 219, priceWithoutVat: 180.99, unit: 'ks', availability: 'nedostupne' },
+export const SUBCATEGORIES_HYDRO: { title: string; img: string }[] = [
+  { title: 'Asfaltové pásy', img: `${CDN}/dek_cz/img/category/-1041301611_ew250_eh250.webp` },
+  { title: 'Hydroizolační fólie', img: `${CDN}/dek_cz/img/category/1936235868_ew250_eh250.webp` },
+  { title: 'Geotextilie', img: `${CDN}/dek_cz/img/category/-1401113185_ew250_eh250.webp` },
+  { title: 'Penetrace, asfaltové nátěry a tmely', img: `${CDN}/dek_cz/img/category/-945584233_ew250_eh250.webp` },
+  { title: 'Hydroizolační nátěry a stěrky', img: `${CDN}/dek_cz/img/category/-1184192486_ew250_eh250.webp` },
+  { title: 'Poplastované plechy', img: `${CDN}/dek_cz/img/category/2034238634_ew250_eh250.webp` },
+  { title: 'Prostupy a těsnění', img: `${CDN}/dek_cz/img/category/2064411603_ew250_eh250.webp` },
 ]
 
+const pimg = (id: string) => `${CDN}/dek_cz/img/product-eshop/${id}_ew307_eh307.webp`
+
+/** Prvních osm produktů z výpisu Hydroizolace, tak jak šly za sebou. */
 export const LISTING: ProductRowProps[] = [
-  { name: 'Samolepicí asfaltový pás GLASTEK 30 STICKER PLUS KVK (role/10 m²)', code: '1010410010', unitPrice: 175.45, unitLabel: 'm²', packPrice: 1754.5, packLabel: 'role', packContains: '10 m²', availability: 'skladem', availabilityDetail: 'v 93 prodejnách' },
-  { name: 'Asfaltový pás GLASTEK 40 SPECIAL MINERAL (role/7,5 m²)', code: '1010301040', unitPrice: 189.9, unitLabel: 'm²', packPrice: 1424.25, packLabel: 'role', packContains: '7,5 m²', availability: 'skladem', availabilityDetail: 'v 88 prodejnách' },
-  { name: 'Asfaltový pás ELASTEK 40 SPECIAL DEKOR červený (role/7,5 m²)', code: '1010301244', unitPrice: 219, unitLabel: 'm²', packPrice: 1642.5, packLabel: 'role', packContains: '7,5 m²', availability: 'na-objednavku', availabilityDetail: 'do 5 dnů' },
-  { name: 'Geotextilie FILTEK 300 g/m² š. 2 m (role/100 m²)', code: '2615261100', unitPrice: 21.89, unitLabel: 'm²', packPrice: 2189, packLabel: 'role', packContains: '100 m²', availability: 'skladem', availabilityDetail: 'v 71 prodejnách' },
-  { name: 'Hydroizolační fólie DEKPLAN 76 1,5 mm š. 2,1 m (role/31,5 m²)', code: '1030101076', unitPrice: 289, unitLabel: 'm²', packPrice: 9103.5, packLabel: 'role', packContains: '31,5 m²', availability: 'nedostupne' },
+  { name: 'Samolepicí asfaltový pás GLASTEK 30 STICKER PLUS KVK (role/10 m²)', code: '1010410010', imageUrl: pimg('1383745849'), unitPrice: 175.45, unitLabel: 'm²', packPrice: 1754.5, originalPackPrice: 3227.07, packLabel: 'role', packContains: '10 m²', availability: 'skladem', availabilityDetail: 'v 93 prodejnách' },
+  { name: 'Geotextilie netkaná FILTEK 300 šířka 2,0 m (role/100 m²)', code: '2615261100', imageUrl: pimg('1851657787'), unitPrice: 38.5, unitLabel: 'm²', packPrice: 3850.07, originalPackPrice: 6638.06, packLabel: 'role', packContains: '100 m²', availability: 'skladem', availabilityDetail: 'v 90 prodejnách' },
+  { name: 'Asfaltový pás s hliníkovou vložkou GLASTEK AL 40 MINERAL (role/7,5 m²)', code: '1010301469', imageUrl: pimg('-1257070088'), unitPrice: 230.14, unitLabel: 'm²', packPrice: 1726.07, originalPackPrice: 2947.56, packLabel: 'role', packContains: '7,5 m²', availability: 'skladem', availabilityDetail: 'v 90 prodejnách' },
+  { name: 'Nátěr podkladní asfaltový DEKPRIMER 10 kg', code: '2230101079', imageUrl: pimg('1123177987'), unitPrice: 96.44, unitLabel: 'kg', packPrice: 964.37, originalPackPrice: 1254.77, packLabel: 'ks', packContains: '10 kg', availability: 'skladem', availabilityDetail: 'v 89 prodejnách' },
+  { name: 'Asfaltový pás oxidovaný DEKBIT V60 S35 (role/10 m²)', code: '1010101697', imageUrl: pimg('-1632183472'), unitPrice: 120.64, unitLabel: 'm²', packPrice: 1206.37, originalPackPrice: 2405.48, packLabel: 'role', packContains: '10 m²', availability: 'skladem', availabilityDetail: 'v 86 prodejnách' },
+  { name: 'Asfaltový lak penetrační Penetral ALP 9 kg', code: '2210101780', imageUrl: pimg('-92370487'), unitPrice: 101.64, unitLabel: 'kg', packPrice: 914.76, originalPackPrice: 1408.08, packLabel: 'ks', packContains: '9 kg', availability: 'skladem', availabilityDetail: 'v 86 prodejnách' },
+  { name: 'Fólie hydroizolační z PVC-P DEKPLAN 76 šedá tl. 1,5 mm (role/24 m²)', code: '1015102080', imageUrl: pimg('-1608637572'), unitPrice: 280.14, unitLabel: 'm²', packPrice: 6723.46, originalPackPrice: 7297.17, packLabel: 'role', packContains: '24 m²', availability: 'skladem', availabilityDetail: 'v 85 prodejnách' },
+  { name: 'Asfaltový pás oxidovaný DEKGLASS G200 S40 (role/7,5 m²)', code: '1010102096', imageUrl: pimg('-218890262'), unitPrice: 170.97, unitLabel: 'm²', packPrice: 1282.3, originalPackPrice: 2479.29, packLabel: 'role', packContains: '7,5 m²', availability: 'skladem', availabilityDetail: 'v 81 prodejnách' },
 ]
+
+/** „Vybrali jsme pro vás“ na homepage — karty z týchž reálných produktů. */
+export const FEATURED: ProductCardProps[] = LISTING.slice(0, 5).map((p) => ({
+  name: p.name,
+  code: p.code,
+  brand: 'DEK',
+  price: p.packPrice,
+  originalPrice: p.originalPackPrice,
+  unit: p.packLabel,
+  availability: p.availability,
+  availabilityDetail: p.availabilityDetail,
+  imageUrl: p.imageUrl,
+}))
 
 export const DETAIL: ProductDetailProps = {
   name: 'Samolepicí asfaltový pás GLASTEK 30 STICKER PLUS KVK (role/10 m²)',
@@ -41,6 +94,7 @@ export const DETAIL: ProductDetailProps = {
   catalogCode: '3RUX3',
   brand: 'DEK',
   labels: ['Výhodná cena', 'Věrnostní program 20 m² = 1 b.'],
+  images: [pimg('1383745849')],
   unitPrice: 175.45,
   unitPriceWithoutVat: 145,
   unitLabel: 'm²',
@@ -60,7 +114,6 @@ export const DETAIL: ProductDetailProps = {
     ['Délka role', '10 m'],
     ['Plocha role', '10 m²'],
     ['Způsob spojování', 'samolepicí'],
-    ['Odolnost proti ohni', 'E'],
   ],
   documents: [
     { title: 'Radon Glastek 30 Sticker Plus', type: 'Atest na radon' },

@@ -12,10 +12,19 @@ export interface HeroBannerProps {
   tone?: 'red' | 'gray' | 'green' | 'blue'
   /** Menší banner do mřížky pod sliderem (.comd-banner-banner) */
   compact?: boolean
+  /** Web má texty zapečené v obrázku — v tomhle režimu se vykreslí jen obrázek s alt textem. */
+  imageOnly?: boolean
 }
 
 /** Banner ze sliderů homepage (.com-homepage__main-slider, .comd-banner-banner) — na webu obrázek, tady barevná plocha s textem. */
-export function HeroBanner({ title, text, cta, href = '#', imageUrl, tone = 'red', compact = false }: HeroBannerProps) {
+export function HeroBanner({ title, text, cta, href = '#', imageUrl, tone = 'red', compact = false, imageOnly = false }: HeroBannerProps) {
+  if (imageOnly && imageUrl) {
+    return (
+      <Box component="a" href={href} sx={{ display: 'block', borderRadius: '3px', overflow: 'hidden', lineHeight: 0 }}>
+        <Box component="img" src={imageUrl} alt={title} loading="lazy" sx={{ width: '100%', height: 'auto', display: 'block' }} />
+      </Box>
+    )
+  }
   const bg = { red: dekColors.red, gray: dekColors.brandSecondary, green: dekColors.green, blue: dekColors.blue }[tone]
   return (
     <Box

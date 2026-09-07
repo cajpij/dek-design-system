@@ -8,7 +8,7 @@ import { NavBar } from '../components/NavBar/NavBar'
 import { Footer } from '../components/Footer/Footer'
 import { ProductDetail } from '../components/ProductDetail/ProductDetail'
 import { ProductCard } from '../components/ProductCard/ProductCard'
-import { DETAIL, FEATURED } from './data'
+import { DEK_LOGO_URL, DETAIL, FEATURED } from './data'
 
 /**
  * Detail produktu (/produkty/detail/…): drobečky (Stavebniny › Hydroizolace › Asfaltové pásy › Parozábrany),
@@ -17,7 +17,7 @@ import { DETAIL, FEATURED } from './data'
 export function ProductPage() {
   return (
     <Box>
-      <Header cartCount={2} />
+      <Header cartCount={2} logoUrl={DEK_LOGO_URL} />
       <NavBar active="Stavebniny" />
       <Container sx={{ pt: 2 }}>
         <Breadcrumbs aria-label="Drobečková navigace">

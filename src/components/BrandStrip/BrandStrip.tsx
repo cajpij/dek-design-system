@@ -7,7 +7,8 @@ import { dekColors } from '../../tokens/dek.tokens'
 export interface BrandStripProps {
   title: string
   subtitle?: string
-  brands: string[]
+  /** Značky z pásu na homepage; kde má web logo, odkazuje se přímo na něj. */
+  brands: { name: string; img?: string }[]
   moreLabel?: string
 }
 
@@ -19,8 +20,12 @@ export function BrandStrip({ title, subtitle, brands, moreLabel = 'Všechny zna�
       {subtitle ? <Typography sx={{ color: 'text.secondary', mb: 3 }}>{subtitle}</Typography> : null}
       <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 2 }}>
         {brands.map((b) => (
-          <Box key={b} sx={{ height: 64, border: `1px solid ${dekColors.grayLighter}`, borderRadius: '3px', display: 'grid', placeItems: 'center', fontWeight: 700, color: dekColors.grayMedium, letterSpacing: '.06em', textTransform: 'uppercase', fontSize: '.8rem' }}>
-            {b}
+          <Box key={b.name} sx={{ height: 72, border: `1px solid ${dekColors.grayLighter}`, borderRadius: '3px', display: 'grid', placeItems: 'center', p: 1 }}>
+            {b.img ? (
+              <Box component="img" src={b.img} alt={b.name} loading="lazy" sx={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            ) : (
+              <Box component="span" sx={{ fontWeight: 700, color: dekColors.grayMedium, letterSpacing: '.06em', textTransform: 'uppercase', fontSize: '.8rem' }}>{b.name}</Box>
+            )}
           </Box>
         ))}
       </Box>

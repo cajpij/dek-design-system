@@ -10,7 +10,7 @@ import { Footer } from '../components/Footer/Footer'
 import { CategoryTile } from '../components/CategoryTile/CategoryTile'
 import { ProductRow } from '../components/ProductRow/ProductRow'
 import { SortBar } from '../components/SortBar/SortBar'
-import { LISTING, SUBCATEGORIES_HYDRO } from './data'
+import { DEK_LOGO_URL, LISTING, SUBCATEGORIES_HYDRO } from './data'
 
 /**
  * Výpis kategorie (/produkty/vypis/2-hydroizolace): drobečky, název, dlaždice podkategorií,
@@ -21,7 +21,7 @@ export function CategoryPage() {
   const [sort, setSort] = useState('doporucujeme')
   return (
     <Box>
-      <Header cartCount={2} />
+      <Header cartCount={2} logoUrl={DEK_LOGO_URL} />
       <NavBar active="Stavebniny" />
       <Container sx={{ pt: 2 }}>
         <Breadcrumbs aria-label="Drobečková navigace">
@@ -32,7 +32,7 @@ export function CategoryPage() {
         <Typography variant="h1" sx={{ mt: 2 }}>Hydroizolace</Typography>
 
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(4, 1fr)', lg: 'repeat(7, 1fr)' }, gap: 2, mb: 3 }}>
-          {SUBCATEGORIES_HYDRO.map((c) => <CategoryTile key={c} title={c} size="small" />)}
+          {SUBCATEGORIES_HYDRO.map((c) => <CategoryTile key={c.title} title={c.title} imageUrl={c.img} size="small" />)}
         </Box>
 
         <Typography sx={{ color: 'text.secondary', maxWidth: '80ch', mb: 3 }}>

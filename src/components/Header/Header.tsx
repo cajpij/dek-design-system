@@ -11,6 +11,8 @@ export interface HeaderProps {
   cartCount?: number
   userName?: string
   onSearch?: (query: string) => void
+  /** Logo z CDN webu (.dek-logo__img); bez URL se ukáže zástupný čtverec. */
+  logoUrl?: string
 }
 
 /**
@@ -18,16 +20,22 @@ export interface HeaderProps {
  * zaoblení jen vlevo, tlačítko vpravo), telefon 510 000 100 + Seznam prodejen, přihlášení a košík vpravo.
  * Bez stínu, bílá. Lišta kategorií je zvlášť: NavBar.
  */
-export function Header({ cartCount = 0, userName, onSearch }: HeaderProps) {
+export function Header({ cartCount = 0, userName, onSearch, logoUrl }: HeaderProps) {
   return (
     <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: `1px solid ${dekColors.grayLighter}` }}>
       <Container>
         <Toolbar disableGutters sx={{ gap: 3, minHeight: 72 }}>
           <Box component="a" href="#" aria-label="DEK — úvodní stránka" sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none' }}>
-            <Box sx={{ width: 44, height: 44, bgcolor: dekColors.red, borderRadius: '4px', display: 'grid', placeItems: 'center', color: '#fff', fontWeight: 700, fontSize: 20 }}>
-              D
-            </Box>
-            <Typography sx={{ fontWeight: 700, color: dekColors.gray, fontSize: 18 }}>Stavebniny DEK</Typography>
+            {logoUrl ? (
+              <Box component="img" src={logoUrl} alt="DEK" width={120} height={40} sx={{ display: 'block' }} />
+            ) : (
+              <>
+                <Box sx={{ width: 44, height: 44, bgcolor: dekColors.red, borderRadius: '4px', display: 'grid', placeItems: 'center', color: '#fff', fontWeight: 700, fontSize: 20 }}>
+                  D
+                </Box>
+                <Typography sx={{ fontWeight: 700, color: dekColors.gray, fontSize: 18 }}>Stavebniny DEK</Typography>
+              </>
+            )}
           </Box>
 
           <Box

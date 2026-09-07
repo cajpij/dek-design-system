@@ -11,7 +11,7 @@ import { ProductCard } from '../components/ProductCard/ProductCard'
 import { InfoBox } from '../components/InfoBox/InfoBox'
 import { BrandStrip } from '../components/BrandStrip/BrandStrip'
 import { Message } from '../components/Message/Message'
-import { FEATURED, HOME_CATEGORIES } from './data'
+import { BOTTOM_BANNERS, BRANDS, DEK_LOGO_URL, FEATURED, HOME_BANNERS, HOME_CATEGORIES, MAIN_BANNER } from './data'
 
 /**
  * Úvodní stránka podle skutečného pořadí sekcí na www.dek.cz:
@@ -22,15 +22,15 @@ import { FEATURED, HOME_CATEGORIES } from './data'
 export function Homepage({ message }: { message?: string }) {
   return (
     <Box>
-      <Header cartCount={0} />
+      <Header cartCount={0} logoUrl={DEK_LOGO_URL} />
       <NavBar />
       {message ? <Message severity="info">{message}</Message> : null}
 
       <Container sx={{ pt: 3 }}>
-        <HeroBanner title="Štědrá sezóna je tady" text="Sbírejte body za nákupy a vyměňte je za dárky. Věrnostní program pro řemeslníky i firmy." cta="Zjistit více" />
+        <HeroBanner title={MAIN_BANNER.alt} imageUrl={MAIN_BANNER.img} imageOnly />
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: 2, mt: 2 }}>
-          {[['Doprava zdarma na krytinu plochých střech', 'gray'], ['Kalkulátor spotřeby materiálu', 'blue'], ['Půjčovna nářadí od 1 dne', 'green'], ['Katalogy ke stažení', 'gray']].map(([t, tone]) => (
-            <HeroBanner key={t} title={t} tone={tone as 'gray' | 'blue' | 'green'} compact />
+          {HOME_BANNERS.map((b) => (
+            <HeroBanner key={b.alt} title={b.alt} imageUrl={b.img} imageOnly />
           ))}
         </Box>
       </Container>
@@ -38,7 +38,7 @@ export function Homepage({ message }: { message?: string }) {
       <Container sx={{ mt: 8 }}>
         <Typography variant="h1" sx={{ textAlign: 'center', mb: 4 }}>Vybírejte z našeho širokého sortimentu</Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }, gap: 2 }}>
-          {HOME_CATEGORIES.map((c) => <CategoryTile key={c} title={c} />)}
+          {HOME_CATEGORIES.map((c) => <CategoryTile key={c.title} title={c.title} imageUrl={c.img} />)}
         </Box>
       </Container>
 
@@ -64,10 +64,15 @@ export function Homepage({ message }: { message?: string }) {
       <BrandStrip
         title="Bezmála 400 kvalitních výrobců"
         subtitle="Pro své zákazníky pečlivě vybíráme jen ty nejlepší dodavatele."
-        brands={['DEK', 'Isover', 'Rigips', 'Knauf', 'Baumit', 'Weber', 'Bramac', 'Tondach', 'Wienerberger', 'Ytong', 'Makita', 'Bosch']}
+        brands={BRANDS}
       />
 
-      <Container sx={{ pb: 4 }}>
+      <Container sx={{ pb: 2 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 2, mb: 6 }}>
+          {BOTTOM_BANNERS.map((b) => (
+            <HeroBanner key={b.alt} title={b.alt} imageUrl={b.img} imageOnly />
+          ))}
+        </Box>
         <Typography variant="h3" sx={{ mb: 1.5 }}>Užitečné odkazy</Typography>
         <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
           {['Kalkulátory', 'Jak poptat a objednat', 'Katalogy ke stažení', 'Štědrá sezóna'].map((l) => <Link key={l} href="#" underline="hover" sx={{ fontWeight: 700 }}>{l}</Link>)}
