@@ -5,8 +5,8 @@ import { ProductPage } from './ProductPage'
 
 /**
  * Celé stránky poskládané z komponent design systemu. Struktura sekcí odpovídá
- * skutečným stránkám na www.dek.cz (pořadí bloků, texty nadpisů, odkazy); obrázky
- * a loga jsou zástupné, data produktů jsou ukázková ve tvaru, který web používá.
+ * skutečným stránkám na www.dek.cz (pořadí bloků, texty nadpisů, odkazy); obsah je
+ * reálný — fotky, loga a produkty se berou přímo z webu (CDN cdn1.idek.cz), viz data.ts.
  */
 const meta = { title: 'Pages DEK', parameters: { layout: 'fullscreen' } } satisfies Meta
 export default meta
