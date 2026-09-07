@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Úvod" />
+
+# DEK Design System
+
+React komponenty pro www.dek.cz postavené na [MUI](https://mui.com/material-ui/) a na tokenech vytažených z produkčního CSS webu.
+
+## Co tu je
+
+- **Tokeny** — barvy (`:root` proměnné webu 1:1), typografie, rozměry, breakpointy. `src/tokens/dek.tokens.ts`.
+- **Motiv** — `dekTheme` pro MUI: každý override odkazuje na třídu z `index.css`, ze které vychází. `src/theme/dekTheme.ts`.
+- **Komponenty** — tenké obaly MUI tam, kde web má vlastní pojmy (Button s tóny red/green/blue/gray, AvailabilityBadge, Price, ProductCard, Message, Header, Footer). Ostatní (formuláře, záložky, tabulky, stránkování, drobečky) jsou čisté MUI s motivem.
+- **Reference** — původní CSS z www.dek.cz (`src/vendor/dek.cz/`) a stránky, které ukazují originální markup s originálním CSS vedle MUI verze.
+
+## Jak to použít v aplikaci
+
+```tsx
+import { DekThemeProvider, Button, ProductCard } from 'dek-design-system'
+
+export function App() {
+  return (
+    <DekThemeProvider>
+      <Button tone="green">Do košíku</Button>
+    </DekThemeProvider>
+  )
+}
+```
+
+`DekThemeProvider` = MUI `ThemeProvider` + `CssBaseline` + Roboto. Nic víc není potřeba.
+
+## Odkud jsou hodnoty
+
+Všechno je z `https://www.dek.cz/css-production/index.css?v=1788505365` (staženo 7. 9. 2026), doplněné o `font.css`, `fontello.css` a čtyři `vue.*.css`. Jak se to dostávalo ven, je v `src/vendor/dek.cz/README.md`.
+
+Co **není** z webu a je to odhad: velikosti `small`/`large` tlačítek, `caption`, `h5`/`h6`, stín karty produktu při hoveru a rozložení patičky. Je to označené v komentářích u příslušných overrides.
