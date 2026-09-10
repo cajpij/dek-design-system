@@ -304,6 +304,13 @@ export function HlaseniVyvozu({ pocatecni = UKAZKOVA }: { pocatecni?: Hlaseni[] 
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  {hlaseni.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={5} sx={{ color: 'text.secondary', py: 4 }}>
+                        Zatím nikdo nic nenahlásil. První vývoz zapiš ve formuláři vlevo.
+                      </TableCell>
+                    </TableRow>
+                  ) : null}
                   {hlaseni.map((h) => {
                     const s = stavTerminu(h.termin)
                     return (
