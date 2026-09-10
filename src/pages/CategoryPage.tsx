@@ -4,6 +4,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
+import { UtilityBar } from '../components/UtilityBar/UtilityBar'
 import { Header } from '../components/Header/Header'
 import { NavBar } from '../components/NavBar/NavBar'
 import { Footer } from '../components/Footer/Footer'
@@ -21,6 +22,7 @@ export function CategoryPage() {
   const [sort, setSort] = useState('doporucujeme')
   return (
     <Box>
+      <UtilityBar />
       <Header cartCount={2} logoUrl={DEK_LOGO_URL} />
       <NavBar active="Stavebniny" />
       <Container sx={{ pt: 2 }}>
@@ -32,7 +34,7 @@ export function CategoryPage() {
         <Typography variant="h1" sx={{ mt: 2 }}>Hydroizolace</Typography>
 
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(4, 1fr)', lg: 'repeat(7, 1fr)' }, gap: 2, mb: 3 }}>
-          {SUBCATEGORIES_HYDRO.map((c) => <CategoryTile key={c.title} title={c.title} imageUrl={c.img} size="small" />)}
+          {SUBCATEGORIES_HYDRO.map((c) => <CategoryTile key={c.title} title={c.title} imageUrl={c.img} href={c.href} size="small" />)}
         </Box>
 
         <Typography sx={{ color: 'text.secondary', maxWidth: '80ch', mb: 3 }}>

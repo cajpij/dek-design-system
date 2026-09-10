@@ -23,15 +23,25 @@ export const HOME_CATEGORIES: { title: string; img: string }[] = [
   { title: 'Půjčovna', img: `${CDN}/dek_cz/img/category-rental/-1446124805_ew250_eh250.webp` },
 ]
 
-/** Hlavní slider a bannery homepage — obrázky mají texty v sobě, přesně jako na webu. */
-export const MAIN_BANNER = { alt: 'Mega akce', img: `${CDN}/img/20c5579deacf78b750cbab8caee623f6.webp` }
-export const HOME_BANNERS: { alt: string; img: string }[] = [
+/**
+ * Hlavní slider úvodní stránky (.dek-slider--BANNER_HOMEPAGE). Čtyři snímky 460 px vysoké,
+ * přepínané záložkami pod nimi — popisky jsou přesně texty těch záložek. Obrázky mají
+ * text v sobě, přesně jako na webu.
+ */
+export const SLIDER_SLIDES: { alt: string; img: string }[] = [
+  { alt: 'MEGA AKCE', img: `${CDN}/img/20c5579deacf78b750cbab8caee623f6.webp` },
   { alt: 'Zářijový stavařský magazín', img: `${CDN}/img/b43e9f9063d47016aa6beccfde75f875.webp` },
-  { alt: 'Věrnostní program Štědrá sezóna', img: `${CDN}/img/af476b260461e63f2c93928fe767eb5d.webp` },
-  { alt: 'Půjčovna — bez kauce a bez rizika', img: `${CDN}/img/78c1973e4461b18cac08a85792dc0e4d.webp` },
-  { alt: '5 způsobů jak poptat', img: `${CDN}/img/61b0fd5485b0f615d3454eb0772dc575.webp` },
+  { alt: 'Věrnostní program ŠTĚDRÁ SEZÓNA', img: `${CDN}/img/af476b260461e63f2c93928fe767eb5d.webp` },
+  { alt: 'Půjčovna - Bez kauce a bez rizika', img: `${CDN}/img/78c1973e4461b18cac08a85792dc0e4d.webp` },
 ]
-export const BOTTOM_BANNERS: { alt: string; img: string }[] = [
+
+/**
+ * Čtyři propagační dlaždice 300 × 360 (.comd-banner-banner) — na webu stojí pod nadpisem
+ * „Vybrali jsme pro vás“. Měřeno 10. 9. 2026: všechny čtyři na jedné řadě v y = 1613,
+ * a žádné produktové karty v té sekci nejsou.
+ */
+export const PROMO_TILES: { alt: string; img: string }[] = [
+  { alt: '5 způsobů jak poptat', img: `${CDN}/img/61b0fd5485b0f615d3454eb0772dc575.webp` },
   { alt: 'Aplikace DEK CZ', img: `${CDN}/img/3e7c0e743ff0c869e4a24cd19ef969a3.webp` },
   { alt: 'Články', img: `${CDN}/img/a0598f6b606f9b6892ea5d3112db93a3.webp` },
   { alt: 'Katalog stavebnin DEK 2026', img: `${CDN}/img/73c26901eb9cb5bc84a4492ffae2963e.webp` },
@@ -50,14 +60,14 @@ export const BRANDS: { name: string; img?: string }[] = [
   { name: 'Heluz' }, { name: 'Best' }, { name: 'Bosch' }, { name: 'Rigips' },
 ]
 
-export const SUBCATEGORIES_HYDRO: { title: string; img: string }[] = [
-  { title: 'Asfaltové pásy', img: `${CDN}/dek_cz/img/category/-1041301611_ew250_eh250.webp` },
-  { title: 'Hydroizolační fólie', img: `${CDN}/dek_cz/img/category/1936235868_ew250_eh250.webp` },
-  { title: 'Geotextilie', img: `${CDN}/dek_cz/img/category/-1401113185_ew250_eh250.webp` },
-  { title: 'Penetrace, asfaltové nátěry a tmely', img: `${CDN}/dek_cz/img/category/-945584233_ew250_eh250.webp` },
-  { title: 'Hydroizolační nátěry a stěrky', img: `${CDN}/dek_cz/img/category/-1184192486_ew250_eh250.webp` },
-  { title: 'Poplastované plechy', img: `${CDN}/dek_cz/img/category/2034238634_ew250_eh250.webp` },
-  { title: 'Prostupy a těsnění', img: `${CDN}/dek_cz/img/category/2064411603_ew250_eh250.webp` },
+export const SUBCATEGORIES_HYDRO: { title: string; img: string; href?: string }[] = [
+  { title: 'Asfaltové pásy', img: `${CDN}/dek_cz/img/category/-1041301611_ew250_eh250.webp`, href: '/produkty/vypis/23-asfaltove-pasy' },
+  { title: 'Hydroizolační fólie', img: `${CDN}/dek_cz/img/category/1936235868_ew250_eh250.webp`, href: '/produkty/vypis/3144-hydroizolacni-folie' },
+  { title: 'Geotextilie', img: `${CDN}/dek_cz/img/category/-1401113185_ew250_eh250.webp`, href: '/produkty/vypis/3150-geotextilie' },
+  { title: 'Penetrace, asfaltové nátěry a tmely', img: `${CDN}/dek_cz/img/category/-945584233_ew250_eh250.webp`, href: '/produkty/vypis/138-penetrace-asfaltove-natery-a-tmely' },
+  { title: 'Hydroizolační nátěry a stěrky', img: `${CDN}/dek_cz/img/category/-1184192486_ew250_eh250.webp`, href: '/produkty/vypis/28413-hydroizolacni-natery-a-sterky' },
+  { title: 'Poplastované plechy', img: `${CDN}/dek_cz/img/category/2034238634_ew250_eh250.webp`, href: '/produkty/vypis/20451-poplastovane-plechy' },
+  { title: 'Prostupy a těsnění', img: `${CDN}/dek_cz/img/category/2064411603_ew250_eh250.webp`, href: '/produkty/vypis/59700-prostupy-a-tesneni' },
 ]
 
 const pimg = (id: string) => `${CDN}/dek_cz/img/product-eshop/${id}_ew307_eh307.webp`
@@ -74,8 +84,12 @@ export const LISTING: ProductRowProps[] = [
   { name: 'Asfaltový pás oxidovaný DEKGLASS G200 S40 (role/7,5 m²)', code: '1010102096', imageUrl: pimg('-218890262'), unitPrice: 170.97, unitLabel: 'm²', packPrice: 1282.3, originalPackPrice: 2479.29, packLabel: 'role', packContains: '7,5 m²', availability: 'skladem', availabilityDetail: 'v 81 prodejnách' },
 ]
 
-/** „Vybrali jsme pro vás“ na homepage — karty z týchž reálných produktů. */
-export const FEATURED: ProductCardProps[] = LISTING.slice(0, 5).map((p) => ({
+/**
+ * Karty z týchž reálných produktů jako výpis. Na úvodní stránce se nepoužívají —
+ * tam web produkty nemá; slouží pásům „Zákazníci společně nakupují“ a „Související
+ * položky“ na detailu produktu.
+ */
+export const PRODUCT_CARDS: ProductCardProps[] = LISTING.map((p) => ({
   name: p.name,
   code: p.code,
   brand: 'DEK',
@@ -107,13 +121,27 @@ export const DETAIL: ProductDetailProps = {
   promo: 'Objednejte si krytinu na plochou střechu a dopravu od nás máte zdarma',
   description:
     'GLASTEK 30 STICKER PLUS je samolepicí pás z SBS modifikovaného asfaltu s nosnou vložkou ze skleněné tkaniny. Na horním povrchu je opatřen jemnozrnným minerálním posypem, na spodním povrchu ochrannou snímatelnou fólií. Používá se jako parozábrana nebo spodní pás hydroizolace plochých střech, kde není možné použít natavování.',
+  /** Tabulka parametrů opsaná ze stránky produktu 10. 9. 2026, včetně malých písmen v popiscích. */
   parameters: [
-    ['Nosná vložka', 'skleněná tkanina'],
-    ['Tloušťka', '3,0 mm'],
-    ['Šířka role', '1,0 m'],
-    ['Délka role', '10 m'],
-    ['Plocha role', '10 m²'],
-    ['Způsob spojování', 'samolepicí'],
+    ['aplikace', 'samolepicí'],
+    ['typ asfaltu', 'modifikovaný'],
+    ['plošná hmotnost', '3,5 kg/m²'],
+    ['barva', 'šedá'],
+    ['tloušťka', '3,0 mm'],
+    ['šířka', '1 m'],
+    ['délka', '10 m'],
+    ['balení', '10 m²'],
+    ['počet rolí na paletě', '20'],
+    ['výztužná vložka', 'skleněná tkanina'],
+    ['plošná hmotnost vložky', '200 g/m²'],
+    ['ohebnost za nízkých teplot', '-20 °C'],
+    ['faktor difuzního odporu', '29000'],
+    ['reakce na oheň', 'třída E'],
+    ['pevnost v tahu podélně', '900 (+/-200 ) N/50mm'],
+    ['pevnost v tahu příčně', '1100 (+/-200 ) N/50mm'],
+    ['tažnost podélně', '12 % (+/-5 %)'],
+    ['tažnost příčně', '12 % (+/-5 %)'],
+    ['odolnost proti protrhávání podélně', '400 (+/-100) N'],
   ],
   documents: [
     { title: 'Radon Glastek 30 Sticker Plus', type: 'Atest na radon' },

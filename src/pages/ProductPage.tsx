@@ -3,12 +3,14 @@ import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
+import { UtilityBar } from '../components/UtilityBar/UtilityBar'
 import { Header } from '../components/Header/Header'
 import { NavBar } from '../components/NavBar/NavBar'
 import { Footer } from '../components/Footer/Footer'
 import { ProductDetail } from '../components/ProductDetail/ProductDetail'
 import { ProductCard } from '../components/ProductCard/ProductCard'
-import { DEK_LOGO_URL, DETAIL, FEATURED } from './data'
+import { Carousel } from '../components/Carousel/Carousel'
+import { DEK_LOGO_URL, DETAIL, PRODUCT_CARDS } from './data'
 
 /**
  * Detail produktu (/produkty/detail/…): drobečky (Stavebniny › Hydroizolace › Asfaltové pásy › Parozábrany),
@@ -17,6 +19,7 @@ import { DEK_LOGO_URL, DETAIL, FEATURED } from './data'
 export function ProductPage() {
   return (
     <Box>
+      <UtilityBar />
       <Header cartCount={2} logoUrl={DEK_LOGO_URL} />
       <NavBar active="Stavebniny" />
       <Container sx={{ pt: 2 }}>
@@ -31,17 +34,33 @@ export function ProductPage() {
         </Box>
 
         <Typography variant="h2" sx={{ mt: 8, mb: 2 }}>Zákazníci společně nakupují</Typography>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(3, 1fr)', lg: 'repeat(5, 1fr)' }, gap: 2 }}>
-          {FEATURED.slice(1).map((p) => <ProductCard key={p.code} {...p} />)}
-        </Box>
+        <RelatedSlider items={PRODUCT_CARDS.slice(1)} label="Zákazníci společně nakupují" />
 
         <Typography variant="h2" sx={{ mt: 8, mb: 2 }}>Související položky</Typography>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(3, 1fr)', lg: 'repeat(5, 1fr)' }, gap: 2 }}>
-          {FEATURED.slice(0, 4).map((p) => <ProductCard key={p.code} {...p} />)}
-        </Box>
+        <RelatedSlider items={PRODUCT_CARDS.slice(0, 6)} label="Související položky" />
       </Container>
       <Footer />
     </Box>
   )
 }
+
+/** Pás souvisejících položek — na webu .dek-slider, tedy slider se šipkami, ne statická mřížka. */
+function RelatedSlider({ items, label, perSlide = 4 }: { items: typeof PRODUCT_CARDS; label: string; perSlide?: number }) {
+  const pages = Array.from({ length: Math.ceil(items.length / perSlide) }, (_, i) => items.slice(i * perSlide, (i + 1) * perSlide))
+  return (
+    <Carousel
+      variant="arrows"
+      height="auto"
+      ariaLabel={label}
+      slides={pages.map((page) => ({
+        content: (
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: `repeat(${perSlide}, 1fr)` }, gap: 2, width: '100%', px: 3 }}>
+            {page.map((p) => <ProductCard key={p.code} {...p} />)}
+          </Box>
+        ),
+      }))}
+    />
+  )
+}
+
 export default ProductPage

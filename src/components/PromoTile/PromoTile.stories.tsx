@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import Box from '@mui/material/Box'
 import { PromoTile } from './PromoTile'
-import { BOTTOM_BANNERS, HOME_BANNERS } from '../../pages/data'
+import { PROMO_TILES } from '../../pages/data'
 
 const meta = { title: 'Komponenty/PromoTile', component: PromoTile, tags: ['autodocs'], args: { title: 'Katalog stavebnin DEK 2026' } } satisfies Meta<typeof PromoTile>
 export default meta
@@ -13,7 +13,7 @@ export const Playground: Story = { decorators: [(S) => <Box sx={{ width: 300 }}>
 export const CtvericeZHomepage: Story = {
   render: () => (
     <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 2 }}>
-      {[HOME_BANNERS[3], ...BOTTOM_BANNERS].map((b) => (
+      {PROMO_TILES.map((b) => (
         <PromoTile key={b.alt} title={b.alt} imageUrl={b.img} />
       ))}
     </Box>

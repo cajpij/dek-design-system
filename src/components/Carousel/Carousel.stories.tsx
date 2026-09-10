@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import Box from '@mui/material/Box'
 import { Carousel } from './Carousel'
-import { BRANDS, HOME_BANNERS, MAIN_BANNER } from '../../pages/data'
+import { BRANDS, SLIDER_SLIDES } from '../../pages/data'
 
 const meta = { title: 'Komponenty/Carousel', component: Carousel, tags: ['autodocs'] } satisfies Meta<typeof Carousel>
 export default meta
@@ -15,10 +15,7 @@ const banner = (b: { alt: string; img: string }) => (
 export const HlavniSlider: Story = {
   args: {
     ariaLabel: 'Akce a novinky',
-    slides: [
-      { label: 'MEGA AKCE', content: banner(MAIN_BANNER) },
-      ...HOME_BANNERS.slice(0, 3).map((b) => ({ label: b.alt, content: banner(b) })),
-    ],
+    slides: SLIDER_SLIDES.map((b) => ({ label: b.alt, content: banner(b) })),
   },
 }
 
