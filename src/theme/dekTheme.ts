@@ -158,7 +158,18 @@ export const dekThemeOptions: ThemeOptions = {
     },
     MuiInputLabel: {
       styleOverrides: {
-        root: { fontSize: '.875rem', lineHeight: 1.3, color: dekColors.gray, position: 'static', transform: 'none', marginBottom: '.25rem' },
+        // .dek-input má popisek staticky nad polem a pořád šedý — MUI ho ve fokusu barví
+        // na primary, což je tady značková červená a plete se s chybou.
+        root: {
+          fontSize: '.875rem',
+          lineHeight: 1.3,
+          color: dekColors.gray,
+          position: 'static',
+          transform: 'none',
+          marginBottom: '.25rem',
+          '&.Mui-focused': { color: dekColors.gray },
+          '&.Mui-error, &.Mui-error.Mui-focused': { color: dekColors.red },
+        },
       },
     },
     MuiTextField: { defaultProps: { variant: 'outlined', size: 'small' } },
