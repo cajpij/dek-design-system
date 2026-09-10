@@ -21,7 +21,8 @@ export function InfoBox({ title, claim, columns }: InfoBoxProps) {
   return (
     <Box sx={{ bgcolor: dekColors.grayLightest, py: 6 }}>
       <Container>
-        <Typography variant="h2" sx={{ textTransform: 'uppercase', letterSpacing: '.04em', mb: 1 }}>{title}</Typography>
+        {/* .com-homepage-info-box__header-title — 30,6 px, tučné, verzálky, na střed */}
+        <Typography variant="h2" sx={{ textTransform: 'uppercase', textAlign: 'center', mb: 1 }}>{title}</Typography>
         {claim ? <Typography sx={{ color: 'text.secondary', maxWidth: 720, mb: 4 }}>{claim}</Typography> : null}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 4 }}>
           {columns.map((c) => (

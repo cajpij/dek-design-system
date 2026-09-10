@@ -24,6 +24,8 @@ export interface CarouselProps {
   index?: number
   onIndexChange?: (index: number) => void
   ariaLabel?: string
+  /** Šířka pruhu záložek. Web ho má pevný a vycentrovaný, ne přes celou šířku snímku. */
+  navWidth?: number | string
 }
 
 /**
@@ -47,6 +49,7 @@ export function Carousel({
   index: controlled,
   onIndexChange,
   ariaLabel = 'Slider',
+  navWidth = 1200,
 }: CarouselProps) {
   const [uncontrolled, setUncontrolled] = useState(defaultIndex)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -161,7 +164,14 @@ export function Carousel({
             role="tablist"
             aria-label={ariaLabel}
             onKeyDown={onTabKey}
-            sx={{ display: 'flex', mt: 2, borderBottom: `1px solid ${dekColors.grayLighter}` }}
+            sx={{
+              display: 'flex',
+              mt: 2,
+              mx: 'auto',
+              // .dek-slider__navigation — na webu pevný pruh, ne přes celou šířku (naměřeno 1200 px při okně 1440)
+              maxWidth: navWidth,
+              borderBottom: `1px solid ${dekColors.grayLighter}`,
+            }}
           >
             {slides.map((s, i) => (
               <Box

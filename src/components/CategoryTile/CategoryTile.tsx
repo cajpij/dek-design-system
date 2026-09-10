@@ -13,7 +13,8 @@ export interface CategoryTileProps {
 
 /** Dlaždice kategorie s obrázkem (.comd-menu-menu-image-large / -slab): obrázek nahoře, název pod ním. */
 export function CategoryTile({ title, href = '#', imageUrl, size = 'large' }: CategoryTileProps) {
-  const h = size === 'large' ? 160 : 96
+  // Web má velkou dlaždici 230 × 230 (naměřeno na homepage), malou ve výpisu podkategorií nižší.
+  const h = size === 'large' ? 230 : 96
   return (
     <Link href={href} underline="none" sx={{ display: 'block', color: dekColors.gray, '&:hover .title': { color: dekColors.red } }}>
       <Box sx={{ height: h, bgcolor: dekColors.grayLightest, borderRadius: '3px', overflow: 'hidden', display: 'grid', placeItems: 'center' }}>

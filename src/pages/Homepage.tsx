@@ -12,6 +12,7 @@ import { PromoTile } from '../components/PromoTile/PromoTile'
 import { InfoBox } from '../components/InfoBox/InfoBox'
 import { BrandStrip } from '../components/BrandStrip/BrandStrip'
 import { Message } from '../components/Message/Message'
+import { dekColors } from '../tokens/dek.tokens'
 import { BRANDS, DEK_LOGO_URL, HOME_CATEGORIES, PROMO_TILES, SLIDER_SLIDES } from './data'
 
 /**
@@ -27,6 +28,9 @@ import { BRANDS, DEK_LOGO_URL, HOME_CATEGORIES, PROMO_TILES, SLIDER_SLIDES } fro
  * V sekci „Vybrali jsme pro vás“ na webu žádné produktové karty nejsou — jsou tam
  * jen ty čtyři dlaždice.
  */
+/** Nadpisy na úvodní stránce jsou verzálkami a na střed — jinde na webu ne. */
+const UPPER = { textTransform: 'uppercase', textAlign: 'center', mb: 4 } as const
+
 export function Homepage({ message }: { message?: string }) {
   return (
     <Box>
@@ -35,7 +39,7 @@ export function Homepage({ message }: { message?: string }) {
       <NavBar />
       {message ? <Message severity="info">{message}</Message> : null}
 
-      <Container sx={{ pt: 3 }}>
+      <Box sx={{ pt: 3 }}>
         <Carousel
           ariaLabel="Akce a novinky"
           slides={SLIDER_SLIDES.map((s) => ({
@@ -56,17 +60,17 @@ export function Homepage({ message }: { message?: string }) {
             ),
           }))}
         />
-      </Container>
+      </Box>
 
       <Container sx={{ mt: 8 }}>
-        <Typography variant="h1" sx={{ textAlign: 'center', mb: 4 }}>Vybírejte z našeho širokého sortimentu</Typography>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(3, 1fr)' }, gap: 2 }}>
+        <Typography variant="h1" sx={UPPER}>Vybírejte z našeho širokého sortimentu</Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(3, 230px)' }, justifyContent: 'center', gap: 4 }}>
           {HOME_CATEGORIES.map((c) => <CategoryTile key={c.title} title={c.title} imageUrl={c.img} />)}
         </Box>
       </Container>
 
       <Container sx={{ mt: 8 }}>
-        <Typography variant="h2" sx={{ mb: 2 }}>Vybrali jsme pro vás</Typography>
+        <Typography variant="h2" sx={UPPER}>Vybrali jsme pro vás</Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: 2 }}>
           {PROMO_TILES.map((b) => <PromoTile key={b.alt} title={b.alt} imageUrl={b.img} />)}
         </Box>
@@ -88,13 +92,13 @@ export function Homepage({ message }: { message?: string }) {
         title="Bezmála 400 kvalitních výrobců"
         subtitle="Pro své zákazníky pečlivě vybíráme jen ty nejlepší dodavatele."
         brands={BRANDS}
-        slider
       />
 
       <Container sx={{ pb: 2 }}>
-        <Typography variant="h3" sx={{ mb: 1.5 }}>Užitečné odkazy</Typography>
-        <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
-          {['Kalkulátory', 'Jak poptat a objednat', 'Katalogy ke stažení', 'Štědrá sezóna'].map((l) => <Link key={l} href="#" underline="hover" sx={{ fontWeight: 700 }}>{l}</Link>)}
+        {/* Na webu to není nadpis: span 18 px, běžný řez, --gray-medium, na střed */}
+        <Typography component="p" sx={{ fontSize: 18, color: dekColors.grayMedium, textAlign: 'center', mb: 1.5 }}>Užitečné odkazy</Typography>
+        <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {['Kalkulátory', 'Jak poptat a objednat', 'Katalogy ke stažení', 'ŠTĚDRÁ SEZÓNA'].map((l) => <Link key={l} href="#" underline="hover" sx={{ fontWeight: 700 }}>{l}</Link>)}
         </Box>
       </Container>
 
